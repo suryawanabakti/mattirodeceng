@@ -15,7 +15,7 @@ export default function Index({ auth, users, search }) {
 
     const handleSearch = (e) => {
         if (e.keyCode == 13) {
-            router.visit(route("admin.users.index"), {
+            router.visit(route("admin.walikelas.index"), {
                 method: "get",
                 data: {
                     search: e.target.value,
@@ -31,7 +31,7 @@ export default function Index({ auth, users, search }) {
         <div className="row g-2 align-items-center">
             <FlashMessage flash={flash} show={show} setShow={setShow} />
             <div className="col">
-                <h2 className="page-title">Siswa</h2>
+                <h2 className="page-title">Wali Kelas</h2>
                 <div className="text-muted mt-1">
                     {users.meta.from}-{users.meta.to} of {users.meta.total}{" "}
                     people
@@ -48,12 +48,12 @@ export default function Index({ auth, users, search }) {
                         value={term}
                     />
                     <Link
-                        href={route("admin.users.create")}
+                        href={route("admin.walikelas.create")}
                         className="btn btn-primary"
                     >
                         {/* Download SVG icon from http://tabler-icons.io/i/plus */}
                         <IconPlus className="icon" />
-                        Siswa
+                        Wali Kelas
                     </Link>
                 </div>
             </div>
@@ -105,7 +105,7 @@ export default function Index({ auth, users, search }) {
                                 <div className="d-flex">
                                     <Link
                                         href={route(
-                                            "admin.users.edit",
+                                            "admin.walikelas.edit",
                                             user.id
                                         )}
                                         className="card-btn"
@@ -126,7 +126,7 @@ export default function Index({ auth, users, search }) {
                                         as="button"
                                         method="delete"
                                         href={route(
-                                            "admin.users.destroy",
+                                            "admin.walikelas.destroy",
                                             user.id
                                         )}
                                         className="card-btn"

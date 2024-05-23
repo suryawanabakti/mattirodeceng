@@ -5,7 +5,7 @@ import { IconEye, IconEyeOff } from "@tabler/icons-react";
 
 export default function Login({ status, canResetPassword }) {
     const { data, setData, post, processing, errors, reset } = useForm({
-        email: "",
+        input_type: "",
         password: "",
         remember: false,
         show_password: false,
@@ -40,7 +40,7 @@ export default function Login({ status, canResetPassword }) {
                                 href="/"
                                 className="navbar-brand navbar-brand-autodark"
                             >
-                                Lareact
+                                Mattiro Deceng
                             </Link>
                         </div>
                         <h2 className="h3 text-center mb-3">
@@ -49,17 +49,22 @@ export default function Login({ status, canResetPassword }) {
                         <form onSubmit={submit}>
                             <div className="mb-3">
                                 <label className="form-label">
-                                    Email address
+                                    Email atau Username
                                 </label>
                                 <input
-                                    type="email"
+                                    type="text"
                                     className="form-control"
-                                    placeholder="your@email.com"
-                                    autoComplete="email"
+                                    placeholder="Email atau Username kamu"
+                                    autoComplete="input_type"
                                     onChange={(e) =>
-                                        setData("email", e.target.value)
+                                        setData("input_type", e.target.value)
                                     }
                                 />
+                                {errors.username && (
+                                    <small className="text-danger">
+                                        {errors.username}
+                                    </small>
+                                )}
                                 {errors.email && (
                                     <small className="text-danger">
                                         {errors.email}
@@ -147,12 +152,6 @@ export default function Login({ status, canResetPassword }) {
                                 </button>
                             </div>
                         </form>
-                        <div className="text-center text-muted mt-3">
-                            Don't have account yet?
-                            <a href="/register" tabIndex={-1}>
-                                Sign up
-                            </a>
-                        </div>
                     </div>
                 </div>
                 <div className="col-12 col-lg-6 col-xl-8 d-none d-lg-block">
@@ -161,7 +160,7 @@ export default function Login({ status, canResetPassword }) {
                         className="bg-cover h-100 min-vh-100"
                         style={{
                             backgroundImage:
-                                "url(./static/photos/finances-us-dollars-and-bitcoins-currency-money-2.jpg)",
+                                "url(https://images.pexels.com/photos/1164572/pexels-photo-1164572.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2)",
                         }}
                     />
                 </div>

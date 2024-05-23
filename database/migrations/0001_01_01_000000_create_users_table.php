@@ -17,8 +17,10 @@ return new class extends Migration
             $table->enum('gender', ['male', 'female']);
             $table->date('date_of_birth')->nullable();
             $table->string('photo')->nullable();
-
+            $table->text('address')->nullable();
             $table->string('email')->unique();
+            $table->string('username')->unique();
+            $table->string('phone')->nullable();
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
             $table->rememberToken();

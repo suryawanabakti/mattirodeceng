@@ -2,7 +2,11 @@
 
 use App\Http\Controllers\ActivityController;
 use App\Http\Controllers\Admin\UserController;
+use App\Http\Controllers\Admin\WalikelasController;
+use App\Http\Controllers\KirimPelanggaranController;
 use App\Http\Controllers\NotificationController;
+use App\Http\Controllers\PelanggaranController;
+use App\Http\Controllers\PelanggaranSiswaController;
 use App\Http\Controllers\ProfileController;
 use App\Models\User;
 use App\Notifications\FeedbackNotification;
@@ -45,6 +49,12 @@ Route::get('/dashboard', function () {
 
 Route::middleware('auth')->group(function () {
     Route::resource('users', UserController::class)->names("admin.users");
+    Route::resource('walikelas', WalikelasController::class)->names("admin.walikelas");
+    Route::resource('pelanggaran', PelanggaranController::class)->names("admin.pelanggaran");
+
+    Route::resource('pelanggaran-siswa', PelanggaranSiswaController::class)->names("admin.pelanggaran-siswa");
+
+
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');

@@ -7,18 +7,17 @@ use App\Models\User;
 use App\Http\Requests\StoreUserRequest;
 use App\Http\Requests\UpdateUserRequest;
 use App\Http\Resources\Admin\UserResource;
-use Carbon\Carbon;
 
-class UserController extends Controller
+class WalikelasController extends Controller
 {
     public function index()
     {
-        $users = User::role('siswa')->orderBy('updated_at', 'desc');
+        $users = User::role('wali kelas')->orderBy('updated_at', 'desc');
         if (request('search')) {
             $users->where('name', 'LIKE', '%' . request('search') . '%');
         }
         // return UserResource::collection($users);
-        return inertia("Admin/Users/Index", ["users" => UserResource::collection($users->paginate(8)), "search" => request('search')]);
+        return inertia("Admin/WaliKelas/Index", ["users" => UserResource::collection($users->paginate(8)), "search" => request('search')]);
     }
 
     public function create()
@@ -81,7 +80,7 @@ class UserController extends Controller
             ];
         }
 
-        return inertia("Admin/Users/Create", ["years" => $years, "days" => $days, "months" => $months]);
+        return inertia("Admin/WaliKelas/Create", ["years" => $years, "days" => $days, "months" => $months]);
     }
 
     public function store(StoreUserRequest $request)
@@ -91,11 +90,11 @@ class UserController extends Controller
         if ($request->photo) {
             $data['photo'] = $request->file('photo')->store('photo');
         }
-        User::create($data)->assignRole("siswa");
+        User::create($data)->assignRole("wali kelas");
 
-        return redirect()->route('admin.users.index')->with([
+        return redirect()->route('admin.walikelas.index')->with([
             "message" => [
-                "label" => "Berhasil tambah ➕ user " . $request->name,
+                "label" => "Berhasil tambah ➕ walikelas " . $request->name,
                 "type" => "success",
             ],
         ]);;
@@ -103,7 +102,7 @@ class UserController extends Controller
 
     public function show(User $user)
     {
-        return inertia("Admin/Users/Show", ["user" => $user]);
+        return inertia("Admin/WaliKelas/Show", ["user" => $user]);
     }
 
     public function edit(User $user)
@@ -169,7 +168,7 @@ class UserController extends Controller
         $month = (new Carbon($user->date_of_birth))->format('m');
         $year = (new Carbon($user->date_of_birth))->format('Y');
 
-        return inertia("Admin/Users/Edit", ["user" => $user, "years" => $years, "months" => $months, "days" => $days, "day" => $day, "month" => $month, "year" => $year]);
+        return inertia("Admin/WaliKelas/Edit", ["user" => $user, "years" => $years, "months" => $months, "days" => $days, "day" => $day, "month" => $month, "year" => $year]);
     }
 
     public function update(UpdateUserRequest $request, User $user)
@@ -185,7 +184,7 @@ class UserController extends Controller
         }
         $user->update($data);
         activity()->withProperties(["name" => $user->name, "id" => $user->id])->log('I have edited user ' . $user->name);
-        return redirect()->route('admin.users.index')->with([
+        return redirect()->route('admin.walikelas.index')->with([
             "message" => [
                 "label" => "Berhasil edit ✏️ user " . $request->name,
                 "type" => "success",
@@ -196,7 +195,7 @@ class UserController extends Controller
     public function destroy(User $user)
     {
         if ($user->hasRole(['super'])) {
-            return redirect()->route('admin.users.index')->with([
+            return redirect()->route('admin.walikelas.index')->with([
                 "message" => [
                     "label" => "Gagal hapus 🗑️ user "  . $user->name,
                     "type" => "error",
@@ -208,7 +207,7 @@ class UserController extends Controller
         @unlink('storage/' . $user->photo);
         activity()->withProperties($user)->log('I have delete user ' . $user->name);
 
-        return redirect()->route('admin.users.index')->with([
+        return redirect()->route('admin.walikelas.index')->with([
             "message" => [
                 "label" => "Berhasil hapus 🗑️ user "  . $user->name,
                 "type" => "success",
