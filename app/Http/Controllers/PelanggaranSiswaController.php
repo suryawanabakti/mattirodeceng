@@ -62,7 +62,7 @@ class PelanggaranSiswaController extends Controller
         foreach ($pelanggaranSiswa as $pelanggaran) {
             $point = $point - $pelanggaran->pelanggaran->point;
         }
-        FonnteService::sendWa($user->phone, "Anda telah melanggar pelanggaran {$pelanggaran->nama_pelanggaran} \nSisa Point : ");
+        FonnteService::sendWa($user->phone, "Anda telah melanggar pelanggaran {$pelanggaran->nama_pelanggaran} \nSisa Point : $point");
 
         return redirect()->to(route("admin.pelanggaran-siswa.index"))->with([
             "message" => [
