@@ -20,7 +20,6 @@ export default function Edit({
         name: user.name,
         email: user.email,
         username: user.username,
-        phone: user.phone,
         password: user.password,
         gender: user.gender,
         month: month,
