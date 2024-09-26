@@ -14,9 +14,9 @@ class UserSeeder extends Seeder
      */
     public function run(): void
     {
-        \App\Models\User::factory(50)->create()->each(function ($user) {
-            $user->assignRole('siswa');
-        });
+        // \App\Models\User::factory(50)->create()->each(function ($user) {
+        //     $user->assignRole('siswa');
+        // });
 
         \App\Models\User::create([
             'name' => 'Super',
@@ -44,22 +44,5 @@ class UserSeeder extends Seeder
             'gender' => 'male',
             'date_of_birth' => now()->format('Y-m-d'),
         ])->assignRole('kepala sekolah');
-
-        $uny = \App\Models\User::create([
-            'name' => 'Uny',
-            'email' => 'uny@mattirodeceng.com',
-            'username' => '721371727',
-            'password' => Hash::make("password"),
-            'gender' => 'female',
-            'phone' => null,
-            'date_of_birth' => now()->format('Y-m-d'),
-        ])->assignRole('siswa');
-
-        Siswa::create([
-            'user_id' => $uny->id,
-            'nama_orangtua' => "Melly",
-            'nohp_orangtua' => "081244067445",
-            'email_orangtua' => 'suryawanabakti18@gmail.com'
-        ]);
     }
 }

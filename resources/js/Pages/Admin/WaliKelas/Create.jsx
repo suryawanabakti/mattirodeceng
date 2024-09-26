@@ -11,6 +11,7 @@ export default function Create({ auth, years, months, days }) {
         name: "",
         email: "",
         username: "",
+        phone: "",
         password: "",
         gender: "",
         month: "",
@@ -234,6 +235,16 @@ export default function Create({ auth, years, months, days }) {
                             value={data.email}
                             placeholder="Iput email..."
                             errors={errors.email}
+                        />
+                        <FormGroup
+                            required={true}
+                            label="phone"
+                            id="phone"
+                            type="phone"
+                            onChange={(e) => setData("phone", e.target.value)}
+                            value={data.phone}
+                            placeholder="Iput phone..."
+                            errors={errors.phone}
                         />
                         <FormGroup
                             required={true}

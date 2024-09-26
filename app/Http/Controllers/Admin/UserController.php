@@ -88,9 +88,11 @@ class UserController extends Controller
     {
         $data = $request->all();
         $data['date_of_birth'] = "{$request->year}-{$request->month}-{$request->day}";
+
         if ($request->photo) {
             $data['photo'] = $request->file('photo')->store('photo');
         }
+
         User::create($data)->assignRole("siswa");
 
         return redirect()->route('admin.users.index')->with([
@@ -108,6 +110,7 @@ class UserController extends Controller
 
     public function edit(User $user)
     {
+
         $years = array();
         foreach (range(now()->year, now()->year - 50) as $year) {
             $years[] = $year;
@@ -184,7 +187,7 @@ class UserController extends Controller
             $request->validate(['password' => 'confirmed', 'min:8']);
         }
         $user->update($data);
-        activity()->withProperties(["name" => $user->name, "id" => $user->id])->log('I have edited user ' . $user->name);
+        // activity()->withProperties(["name" => $user->name, "id" => $user->id])->log('I have edited user ' . $user->name);
         return redirect()->route('admin.users.index')->with([
             "message" => [
                 "label" => "Berhasil edit ✏️ user " . $request->name,
@@ -206,7 +209,7 @@ class UserController extends Controller
 
         $user->delete();
         @unlink('storage/' . $user->photo);
-        activity()->withProperties($user)->log('I have delete user ' . $user->name);
+        // activity()->withProperties($user)->log('I have delete user ' . $user->name);
 
         return redirect()->route('admin.users.index')->with([
             "message" => [

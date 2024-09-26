@@ -112,7 +112,7 @@ export default function Navigation({ user }) {
                             >
                                 <IconSun className="icon" />
                             </a>
-                            <div className="nav-item dropdown d-none d-md-flex me-3">
+                            {/* <div className="nav-item dropdown d-none d-md-flex me-3">
                                 <a
                                     href="#"
                                     className="nav-link px-0"
@@ -192,7 +192,7 @@ export default function Navigation({ user }) {
                                         </div>
                                     </div>
                                 </div>
-                            </div>
+                            </div> */}
                         </div>
                         <div className="nav-item dropdown">
                             <a
@@ -223,18 +223,18 @@ export default function Navigation({ user }) {
                                 </div>
                             </a>
                             <div className="dropdown-menu dropdown-menu-end dropdown-menu-arrow">
-                                <Link
+                                {/* <Link
                                     href={route("notifications.index")}
                                     className="dropdown-item"
                                 >
                                     Notifications
-                                </Link>
-                                <Link
+                                </Link> */}
+                                {/* <Link
                                     href={route("activities.index")}
                                     className="dropdown-item"
                                 >
                                     Activities
-                                </Link>
+                                </Link> */}
 
                                 <div className="dropdown-divider" />
                                 <Link

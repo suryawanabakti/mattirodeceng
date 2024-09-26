@@ -106,8 +106,9 @@ class WalikelasController extends Controller
         return inertia("Admin/WaliKelas/Show", ["user" => $user]);
     }
 
-    public function edit(User $user)
+    public function edit($walikelas)
     {
+        $user = User::find($walikelas);
         $years = array();
         foreach (range(now()->year, now()->year - 50) as $year) {
             $years[] = $year;
@@ -184,7 +185,7 @@ class WalikelasController extends Controller
             $request->validate(['password' => 'confirmed', 'min:8']);
         }
         $user->update($data);
-        activity()->withProperties(["name" => $user->name, "id" => $user->id])->log('I have edited user ' . $user->name);
+        // activity()->withProperties(["name" => $user->name, "id" => $user->id])->log('I have edited user ' . $user->name);
         return redirect()->route('admin.walikelas.index')->with([
             "message" => [
                 "label" => "Berhasil edit ✏️ user " . $request->name,
@@ -193,8 +194,9 @@ class WalikelasController extends Controller
         ]);;;
     }
 
-    public function destroy(User $user)
+    public function destroy($walikelas)
     {
+        $user = User::find($walikelas);
         if ($user->hasRole(['super'])) {
             return redirect()->route('admin.walikelas.index')->with([
                 "message" => [
@@ -206,7 +208,7 @@ class WalikelasController extends Controller
 
         $user->delete();
         @unlink('storage/' . $user->photo);
-        activity()->withProperties($user)->log('I have delete user ' . $user->name);
+        // activity()->withProperties($user)->log('I have delete user ' . $user->name);
 
         return redirect()->route('admin.walikelas.index')->with([
             "message" => [

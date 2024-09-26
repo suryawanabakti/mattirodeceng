@@ -57,7 +57,12 @@ class PelanggaranSiswaController extends Controller
 
         $pelanggaran = Pelanggaran::find($request->pelanggaran_id);
 
-        FonnteService::sendWa($user->phone, "Anda telah melanggar pelanggaran {$pelanggaran->nama_pelanggaran}");
+        $point = 100;
+        $pelanggaranSiswa = PelanggaranSiswa::with('pelanggaran')->where('user_id', $request->user_id)->get();
+        foreach ($pelanggaranSiswa as $pelanggaran) {
+            $point = $point - $pelanggaran->pelanggaran->point;
+        }
+        FonnteService::sendWa($user->phone, "Anda telah melanggar pelanggaran {$pelanggaran->nama_pelanggaran} \nSisa Point : ");
 
         return redirect()->to(route("admin.pelanggaran-siswa.index"))->with([
             "message" => [

@@ -19,6 +19,8 @@ export default function Edit({
     const { data, setData, put, errors, processing } = useForm({
         name: user.name,
         email: user.email,
+        username: user.username,
+        phone: user.phone,
         password: user.password,
         gender: user.gender,
         month: month,

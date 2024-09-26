@@ -19,6 +19,7 @@ export default function Edit({
     const { data, setData, put, errors, processing } = useForm({
         name: user.name,
         email: user.email,
+        username: user.username,
         password: user.password,
         gender: user.gender,
         month: month,
@@ -39,11 +40,13 @@ export default function Edit({
     const header = (
         <div className="row g-2 align-items-center">
             <div className="col">
-                <h2 className="page-title">Users </h2>
+                <h2 className="page-title">Wali Kelas </h2>
                 <nav aria-label="breadcrumb">
                     <ol class="breadcrumb mt-1">
                         <li class="breadcrumb-item">
-                            <Link href={route("admin.users.index")}>Users</Link>
+                            <Link href={route("admin.users.index")}>
+                                Wali Kelas
+                            </Link>
                         </li>
                         <li class="breadcrumb-item active" aria-current="page">
                             Edit
@@ -215,6 +218,18 @@ export default function Edit({
                                 setData("photo", e.target.files[0])
                             }
                             errors={errors.photo}
+                        />
+                        <FormGroup
+                            required={true}
+                            label="username"
+                            id="username"
+                            type="username"
+                            onChange={(e) =>
+                                setData("username", e.target.value)
+                            }
+                            value={data.username}
+                            placeholder="Iput username..."
+                            errors={errors.username}
                         />
                         <FormGroup
                             required={true}
