@@ -90,16 +90,18 @@ export default function Index({ auth, users, search }) {
                                         {user.gender}
                                     </div>
                                     <div className="mt-3">
-                                        {user.roles.map((role) => {
-                                            return (
-                                                <span
-                                                    className="badge bg-purple-lt text-capitalize"
-                                                    key={role.id}
-                                                >
-                                                    {role.name}
-                                                </span>
-                                            );
-                                        })}
+                                        {user.point > 90 && (
+                                            <span className="badge bg-success-lt text-capitalize">
+                                                Sisa Point Pelanggaran:{" "}
+                                                {user.point}
+                                            </span>
+                                        )}
+                                        {user.point < 80 && (
+                                            <span className="badge bg-warning-lt text-capitalize">
+                                                Sisa Point Pelanggaran:{" "}
+                                                {user.point}
+                                            </span>
+                                        )}
                                     </div>
                                 </div>
                                 <div className="d-flex">

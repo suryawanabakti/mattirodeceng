@@ -2,7 +2,7 @@ import AuthenticatedLayout from "@/Layouts/AuthenticatedLayout";
 import { Head } from "@inertiajs/react";
 import { IconDatabase, IconUsers } from "@tabler/icons-react";
 
-export default function Dashboard({ auth }) {
+export default function Dashboard({ auth, userCount, pelanggaranCount }) {
     return (
         <AuthenticatedLayout user={auth.user} header={""}>
             <Head title="Dashboard" />
@@ -19,7 +19,7 @@ export default function Dashboard({ auth }) {
                                 </div>
                                 <div className="col">
                                     <div className="font-weight-medium">
-                                        5 Pelanggaran
+                                        {pelanggaranCount} Pelanggaran
                                     </div>
                                 </div>
                             </div>
@@ -38,7 +38,7 @@ export default function Dashboard({ auth }) {
                                 </div>
                                 <div className="col">
                                     <div className="font-weight-medium">
-                                        10 Siswa
+                                        {userCount} Siswa
                                     </div>
                                 </div>
                             </div>

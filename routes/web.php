@@ -8,6 +8,7 @@ use App\Http\Controllers\NotificationController;
 use App\Http\Controllers\PelanggaranController;
 use App\Http\Controllers\PelanggaranSiswaController;
 use App\Http\Controllers\ProfileController;
+use App\Models\Pelanggaran;
 use App\Models\User;
 use App\Notifications\FeedbackNotification;
 use Illuminate\Foundation\Application;
@@ -47,8 +48,9 @@ Route::get('/dashboard', function () {
     if (request()->user()->hasRole('siswa')) {
         return redirect('/pelanggaran-siswa');
     }
-
-    return Inertia::render('Dashboard');
+    $userCount = User::role('siswa')->count();
+    $pelanggaranCount = Pelanggaran::count();
+    return Inertia::render('Dashboard', ["userCount" => $userCount, "pelanggaranCount" => $pelanggaranCount]);
 })->middleware(['auth', 'verified'])->name('dashboard');
 
 Route::middleware('auth')->group(function () {
