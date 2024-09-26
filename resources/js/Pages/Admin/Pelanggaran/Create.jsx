@@ -22,6 +22,7 @@ export default function Create({ auth }) {
         post(route("admin.pelanggaran.store"));
         console.log(data);
     };
+
     const header = (
         <div className="row g-2 align-items-center">
             <div className="col">
@@ -53,6 +54,7 @@ export default function Create({ auth }) {
             </div>
         </div>
     );
+
     return (
         <AuthenticatedLayout user={auth.user} header={header}>
             <Head title="Create" />

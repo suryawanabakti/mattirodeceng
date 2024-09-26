@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { IconCheck, IconExclamationCircle } from "@tabler/icons-react";
 
 export default function FlashMessage({ flash, show, setShow }) {
+    console.log("FLASH MESSAGE", flash);
     return (
         <div
             className={`alert ${

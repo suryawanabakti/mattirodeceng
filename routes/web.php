@@ -17,7 +17,7 @@ use Inertia\Inertia;
 use Surya\Sso\Authenticated;
 
 Route::get('/', function () {
-
+    return redirect('/login');
     return Inertia::render('Welcome', [
         'canLogin' => Route::has('login'),
         'canRegister' => Route::has('register'),
@@ -44,6 +44,10 @@ Route::get('/login-sso', function () {
 });
 
 Route::get('/dashboard', function () {
+    if (request()->user()->hasRole('siswa')) {
+        return redirect('/pelanggaran-siswa');
+    }
+
     return Inertia::render('Dashboard');
 })->middleware(['auth', 'verified'])->name('dashboard');
 

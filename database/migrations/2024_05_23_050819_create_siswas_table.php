@@ -13,7 +13,8 @@ return new class extends Migration
     {
         Schema::create('siswa', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('user_id')->references('id')->on('users')->cascadeOnDelete(); //siswa
+            $table->foreignUuid('user_id');
+            $table->foreign('user_id')->references('id')->on('users')->cascadeOnDelete();
             $table->string('nama_orangtua');
             $table->string('nohp_orangtua');
             $table->string('email_orangtua');

@@ -128,9 +128,18 @@ export default function Index({ auth, users, search, pelanggaran }) {
                                         {user.gender}
                                     </div>
                                     <div className="mt-3">
-                                        <span className="badge bg-purple-lt text-capitalize">
-                                            {user.username}
-                                        </span>
+                                        {user.point > 90 && (
+                                            <span className="badge bg-success-lt text-capitalize">
+                                                Sisa Point Pelanggaran:{" "}
+                                                {user.point}
+                                            </span>
+                                        )}
+                                        {user.point < 90 && (
+                                            <span className="badge bg-warning-lt text-capitalize">
+                                                Sisa Point Pelanggaran:{" "}
+                                                {user.point}
+                                            </span>
+                                        )}
                                     </div>
                                 </div>
                                 <div className="d-flex">

@@ -9,6 +9,7 @@ use App\Http\Resources\Admin\UserResource;
 use App\Http\Resources\PelanggaranSiswaResource;
 use App\Models\Pelanggaran;
 use App\Models\User;
+use App\Service\FonnteService;
 
 class PelanggaranSiswaController extends Controller
 {
@@ -37,6 +38,7 @@ class PelanggaranSiswaController extends Controller
                 "label" => $p->nama_pelanggaran
             ];
         });
+
         return inertia("Admin/PelanggaranSiswa/Create", ["users" => UserResource::collection($users->paginate(8)), "search" => request('search'), "pelanggaran" => $pelanggaran]);
     }
 
@@ -50,9 +52,18 @@ class PelanggaranSiswaController extends Controller
             'pelanggaran_id' => $request->pelanggaran_id,
             'tanggal' => $request->tanggal
         ]);
+
+        $user = User::find($request->user_id);
+
+        $pelanggaran = Pelanggaran::find($request->pelanggaran_id);
+
+        FonnteService::sendWa($user->phone, "Anda telah melanggar pelanggaran {$pelanggaran->nama_pelanggaran}");
+
         return redirect()->to(route("admin.pelanggaran-siswa.index"))->with([
-            "message" => "Berhasil mengirimkan pelanggaran",
-            "type" => "success"
+            "message" => [
+                "label" => "Berhasil menambahkan pelanggaran ke siswa",
+                "type" => "success"
+            ],
         ]);
     }
 

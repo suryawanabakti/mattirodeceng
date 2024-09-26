@@ -24,6 +24,7 @@ export default function Edit({
         month: month,
         day: day,
         year: year,
+        phone: user.phone,
         photo: "",
     });
 
@@ -218,6 +219,18 @@ export default function Edit({
                         />
                         <FormGroup
                             required={true}
+                            label="username"
+                            id="username"
+                            type="username"
+                            onChange={(e) =>
+                                setData("username", e.target.value)
+                            }
+                            value={data.username}
+                            placeholder="Iput username..."
+                            errors={errors.username}
+                        />
+                        <FormGroup
+                            required={true}
                             label="Email"
                             id="email"
                             type="email"
@@ -225,6 +238,16 @@ export default function Edit({
                             value={data.email}
                             placeholder="Iput email..."
                             errors={errors.email}
+                        />
+                        <FormGroup
+                            required={true}
+                            label="Nomor WA"
+                            id="phone"
+                            type="phone"
+                            onChange={(e) => setData("phone", e.target.value)}
+                            value={data.phone}
+                            placeholder="Input phone number..."
+                            errors={errors.phone}
                         />
                         <FormGroup
                             required={true}
